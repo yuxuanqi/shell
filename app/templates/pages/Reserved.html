@@ -1,0 +1,188 @@
+
+
+      <div class="content">
+        <div class="row">
+                                      <form method='post' >
+
+<label for="from">From</label>
+<select name="from" id = "from">
+    {% for column in weekly_count_columns %}
+    <option> {{column}}</option>
+    {% endfor %}
+</select>
+<label for="to">to</label>
+<select name="to" id = "to">
+    {% for column in weekly_count_columns %}
+    <option> {{column}}</option>
+    {% endfor %}
+</select>
+     <input type="submit" name="go" value="Search" >
+ </form>
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Weekly Non-buyable Top ASIN</h5>
+                    <h2 class="card-title">Volume</h2>
+                  </div>
+
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="weekly_count"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">GS Weekly None Buyable Top ASIN Count</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-bordered table-responsive">
+                  <table class="table" id="">
+
+         <thead>
+            <tr>
+                <th>GMS Weighted ASIN Buyability (Top 30%) Volume</th>
+                {% for column in weekly_count_columns %}
+                <th> {{column}}</th>
+                {% endfor %}
+            </tr>
+         </thead>
+
+         <tbody>
+        <tr>
+        <td>
+            Buyable ASIN Count
+        </td>
+        {% for d in weekly_count_buyable_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+        <td>Total ASIN Count</td>
+        {% for d in weekly_count_total_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+    <td>% Buyable ASIN Count</td>
+        {% for d in weekly_count_buyable_percent %}
+            <td>{{  (d*100)|round(2,"ceil")|string+"%" }}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+        <td>% Buyable ASIN Count Goal</td>
+        {% for d in weekly_count_buyable_goal %}
+            <td>{{ (d*100)|string+"%"  }}</td>
+        {% endfor %}
+
+        </tr>
+         </tbody>
+
+                  </table>
+                                        <tr><p>Total ASIN Count = Average of “total_asin_count”,  group by week</p>
+        <p>Buyable ASIN Count = Total ASIN  Count - Count of “asin”, group by week</p>
+        <p>% Buyable ASIN Count =  “Buyable ASIN Count” / “Total ASIN Count”</p></tr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Weekly Non-buyable Top ASIN</h5>
+                    <h2 class="card-title">GMS</h2>
+                  </div>
+
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="weekly_gms"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title">GS Weekly None Buyable Top ASIN GMS</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-bordered table-responsive">
+                  <table class="table" id="">
+
+         <thead>
+            <tr>
+                <th>GMS Weighted ASIN Buyability (Top 30%) GMS</th>
+                {% for column in weekly_gms_columns %}
+                <th> {{column}}</th>
+                {% endfor %}
+            </tr>
+         </thead>
+
+         <tbody>
+        <tr>
+        <td>
+            Buyable ASIN GMS
+        </td>
+        {% for d in weekly_gms_buyable_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+        <td>Total ASIN GMS</td>
+        {% for d in weekly_gms_total_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+    <td>% Buyable ASIN GMS Percent</td>
+        {% for d in weekly_gms_buyable_percent %}
+            <td>{{  (d*100)|round(2,"ceil")|string+"%" }}</td>
+        {% endfor %}
+
+        </tr>
+        <tr>
+        <td>% Buyable ASIN GMS Goal</td>
+        {% for d in weekly_gms_buyable_goal %}
+            <td>{{ (d*100)|string+"%"  }}</td>
+        {% endfor %}
+        </tr>
+         </tbody>
+
+                  </table>
+                    <tr><p>Total GMS = Average of “total_gms”,  group by week</p>
+        <p>Buyable ASIN GMS = Total GMS – Sum  of “gms_usd”, group by week</p>
+        <p>% Buyable ASIN GMS = Buyable ASIN GMS/ Total GMS</p></tr>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+

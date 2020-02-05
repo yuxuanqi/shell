@@ -1,0 +1,191 @@
+
+
+      <div class="content">
+          <div class="row">
+
+              <form method='post' >
+
+<label for="from">From</label>
+<input type="date" id="from" name="from">
+<label for="to">to</label>
+<input type="date" id="to" name="to">
+     <input type="submit" name="go" value="Search" >
+ </form>
+
+          </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h2 class="card-category">Selection Buyability %</h2>
+                    <!--<h2 class="card-title">Volume</h2>-->
+                  </div>
+
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="chartBig1"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <!--<h4 class="card-title">GMS Weighted ASIN Buyability (Top 30%) Volume</h4>-->
+              </div>
+              <div class="card-body">
+                <div class="table-bordered table-responsive">
+                  <table class="table" id="top30table">
+
+         <thead>
+            <tr>
+                <th>Metrics</th>
+                {% for column in top30_volume_columns %}
+                <th> {{column}}</th>
+                {% endfor %}
+            </tr>
+         </thead>
+
+         <tbody>
+        <tr>
+        <td>
+           # of Buyable ASINs
+        </td>
+        {% for d in top30_volume_buyable_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+        <td># of Total ASINs</td>
+        {% for d in top30_volume_total_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+    <td>Selection Buyability %</td>
+        {% for d in top30_volume_buyable_percent %}
+            <td>{{  (d*100)|round(2,"ceil")|string+"%" }}</td>
+        {% endfor %}
+
+        </tr>
+                 <!--<tr>-->
+        <!--<td>% Buyable ASIN Count Goal</td>-->
+        <!--{% for d in top30_volume_buyable_goal %}-->
+            <!--<td>{{ (d*100)|string+"%"  }}</td>-->
+        <!--{% endfor %}-->
+
+        <!--</tr>-->
+         </tbody>
+
+                  </table>
+                                        <tbody>
+         <tr>
+             <!--<p>Total ASIN Count = Average of “total_asin_count”,  group by “day”</p>-->
+             <!--<p>Buyable ASIN Count = Total ASIN  Count - Count of “asin”, group by “day”</p>-->
+                                        <p>% Buyable ASIN Count =  “Buyable ASIN Count” / “Total ASIN Count”</p></tr>
+         </tbody>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h2 class="card-category">GMS Weighted Selection Buyability %</h2>
+                    <!--<h2 class="card-title">GMS</h2>-->
+                  </div>
+
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="top_30_gms"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <!--<h4 class="card-title">GMS Weighted ASIN Buyability (Top 30%) GMS</h4>-->
+              </div>
+              <div class="card-body">
+                <div class="table-bordered table-responsive">
+                  <table class="table" id="">
+
+         <thead>
+            <tr>
+                <th>Metrics</th>
+                {% for column in top30_gms_columns %}
+                <th> {{column}}</th>
+                {% endfor %}
+            </tr>
+         </thead>
+
+         <tbody>
+        <tr>
+        <td>
+            GMS of buyable ASINs
+        </td>
+        {% for d in top30_gms_buyable_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+        <td>GMS of total ASINs</td>
+        {% for d in top30_gms_total_asin %}
+            <td>{{'{0:,}'.format(d | int)}}</td>
+        {% endfor %}
+
+        </tr>
+                 <tr>
+    <td>GMS Weighted Selection Buyability %  </td>
+        {% for d in top30_gms_buyable_percent %}
+            <td>{{  (d*100)|round(2,"ceil")|string+"%" }}</td>
+        {% endfor %}
+
+        </tr>
+        <!--<tr>-->
+        <!--<td>% Buyable ASIN GMS Goal</td>-->
+        <!--{% for d in top30_gms_buyable_goal %}-->
+            <!--<td>{{ (d*100)|string+"%"  }}</td>-->
+        <!--{% endfor %}-->
+        <!--</tr>-->
+         </tbody>
+
+                  </table>
+                                                            <tbody>
+         <tr>
+             <p>GMS Weighted Selection Buyability % = GMS of buyable ASINs / GMS of total ASINs</p>
+             <!--<p>Total GMS = Average of “total_gms”,  group by “day”</p>-->
+             <!--<p>Buyable ASIN GMS = Total GMS – Sum  of “p30d_gms”, group by “day”</p>-->
+             <!--<p>% Buyable ASIN GMS = Buyable ASIN GMS/ Total GMS</p>-->
+         <!---->
+         </tr>
+         </tbody>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
